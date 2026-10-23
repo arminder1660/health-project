@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CardiaNova &middot; Heart Health & Clinical Guidance</title>
+  <meta name="description" content="Understand your heart symptoms, get personalised dietary guidance, and connect with verified cardiologists — all in one place.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar">
+    <div class="brand" onclick="switchStage('home')" id="brand-logo">
+      <div class="brand-icon" id="main-brand-icon">&#10084;&#65039;</div>
+      <span class="brand-name">Cardia<span>Nova</span></span>
+    </div>
+
+    <div class="nav-links">
+      <button class="nav-btn active" id="nav-home"    onclick="switchStage('home')">Home</button>
+      <button class="nav-btn"        id="nav-consult" onclick="switchStage('wizard')">Symptom Check</button>
+      <button class="nav-btn"        id="nav-sim"     onclick="switchStage('simulator')">Lifestyle Lab</button>
+      <button class="nav-btn"        id="nav-docs"    onclick="switchStage('doctors')">Find Doctors</button>
+    </div>
+
+    <!-- Dynamic Clinical Risk Theme Controls -->
+    <div class="theme-pill-container" id="theme-pill-container">
+      <div class="theme-badge-current" id="current-theme-badge" title="Active clinical risk theme">
+        <span class="theme-status-dot" id="theme-status-dot"></span>
+        <span id="theme-status-text">Theme: Default</span>
+      </div>
+      <div class="theme-quick-buttons">
+        <button type="button" class="t-btn t-btn-green" id="t-btn-green" onclick="setTheme('green')" title="Person didn't need to consult doctor -> Green">🟢 Green</button>
+        <button type="button" class="t-btn t-btn-yellow" id="t-btn-yellow" onclick="setTheme('yellow')" title="Moderate risk -> Yellow">🟡 Yellow</button>
+        <button type="button" class="t-btn t-btn-red" id="t-btn-red" onclick="setTheme('red')" title="In risk -> Red">🔴 Red</button>
+        <button type="button" class="t-btn t-btn-blood-red" id="t-btn-blood-red" onclick="setTheme('blood-red')" title="High extreme risk -> Blood Red">🩸 Blood Red</button>
+        <button type="button" class="t-btn t-btn-reset" onclick="resetTheme()" title="Reset theme">↺</button>
+      </div>
+    </div>
+
+    <div class="emergency-tag" id="main-emergency-tag">
+      <span class="pulse-dot"></span>
+      <span id="emergency-tag-text">Emergency: 911 &middot; 112 &middot; 108</span>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- ================================================================
+         STAGE 1 — HOME
+    ================================================================ -->
+    <section id="stage-home" class="stage active">
+      <div class="container">
+
+        <!-- Hero -->
+        <div class="hero-section">
+          <div class="hero-left">
+            <div class="hero-tag">&#129657; Empathetic Heart Health Platform</div>
+            <h1 class="hero-h1">Your heart health,<br><em>simplified.</em></h1>
+            <p class="hero-desc">
+              Understand your symptoms in plain language, get a personalised heart-healthy diet plan,
+              and know exactly when to see a specialist — without the medical jargon.
+            </p>
+            <div class="hero-cta-group">
+              <button class="btn-coral" onclick="switchStage('wizard')">
+                Check My Symptoms &#8594;
+              </button>
+              <button class="btn-ghost" onclick="switchStage('doctors')">Find a Cardiologist</button>
+            </div>
+            <div class="hero-stats">
+              <div>
+                <div class="hero-stat-num">70,000+</div>
+                <div class="hero-stat-label">Patient records trained on</div>
+              </div>
+              <div>
+                <div class="hero-stat-num">4</div>
+                <div class="hero-stat-label">Cardiac conditions covered</div>
+              </div>
+              <div>
+                <div class="hero-stat-num">AHA/DASH</div>
+                <div class="hero-stat-label">Evidence-based protocols</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Hero illustration -->
+          <div class="hero-right">
+            <div class="hero-illustration">
+              <div class="hero-heart-icon">&#128149;</div>
+            </div>
+            <!-- Floating cards -->
+            <div class="floating-card card-bpm">
+              <span class="fc-icon">&#128147;</span>
+              <div>
+                <div class="fc-label">Heart Rate</div>
+                <div class="fc-value">72 bpm</div>
+              </div>
+            </div>
+            <div class="floating-card card-bp">
+              <span class="fc-icon">&#129740;</span>
+              <div>
+                <div class="fc-label">Blood Pressure</div>
+                <div class="fc-value">118 / 76</div>
+              </div>
+            </div>
+            <div class="floating-card card-ok">
+              <span class="fc-icon">&#10004;&#65039;</span>
+              <div>
+                <div class="fc-ok">Assessment Complete</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- How it works -->
+        <div class="how-strip">
+          <div class="how-step">
+            <div class="how-num">1</div>
+            <div>
+              <div class="how-step-title">Pick your concern</div>
+              <div class="how-step-desc">Select the symptom or condition that worries you most right now.</div>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-num">2</div>
+            <div>
+              <div class="how-step-title">Answer 4 short questions</div>
+              <div class="how-step-desc">Tell us about your body, your sensations, when it happens, and your health background.</div>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-num">3</div>
+            <div>
+              <div class="how-step-title">Get your care plan</div>
+              <div class="how-step-desc">Receive a clear clinical verdict, personalised diet, remedies, and matched doctors.</div>
+            </div>
+          </div>
+          <div class="how-step">
+            <div class="how-num">4</div>
+            <div>
+              <div class="how-step-title">Simulate lifestyle changes</div>
+              <div class="how-step-desc">See exactly how lowering your BP or weight changes your cardiovascular risk in real time.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Symptom selector -->
+        <div class="section-heading-group">
+          <div class="section-label">What brings you in today?</div>
+          <h2 class="section-h2">Choose your primary concern</h2>
+          <p class="section-sub">Each path is a guided, age-friendly clinical evaluation tailored to your inputs.</p>
+        </div>
+
+        <div class="symptom-grid">
+          <div class="symptom-card" onclick="selectProblem('angina')" id="card-angina">
+            <div class="sc-icon-wrap sc-red">&#129760;</div>
+            <div class="sc-title">Chest Heaviness or Pressure</div>
+            <p class="sc-desc">Tightness or squeezing in the centre of the chest — especially when walking, climbing stairs, or under physical effort.</p>
+            <span class="sc-cta">Start Assessment <span class="sc-cta-arrow">&#8594;</span></span>
+          </div>
+
+          <div class="symptom-card" onclick="selectProblem('palpitations')" id="card-palpitations">
+            <div class="sc-icon-wrap sc-amber">&#9889;</div>
+            <div class="sc-title">Heart Flutters &amp; Racing Pulse</div>
+            <p class="sc-desc">Sudden fluttering, skipped beats, or pounding heart rate triggered by stress, caffeine, fatigue, or occurring randomly.</p>
+            <span class="sc-cta">Start Assessment <span class="sc-cta-arrow">&#8594;</span></span>
+          </div>
+
+          <div class="symptom-card" onclick="selectProblem('hypertension')" id="card-hypertension">
+            <div class="sc-icon-wrap sc-blue">&#129656;</div>
+            <div class="sc-title">High Blood Pressure Check</div>
+            <p class="sc-desc">Your monitor noted elevated BP above 130/85 mm Hg, accompanied by mild head heaviness or fatigue after activity.</p>
+            <span class="sc-cta">Start Assessment <span class="sc-cta-arrow">&#8594;</span></span>
+          </div>
+
+          <div class="symptom-card" onclick="selectProblem('reflux')" id="card-reflux">
+            <div class="sc-icon-wrap sc-green">&#128293;</div>
+            <div class="sc-title">Heartburn vs. Heart Attack</div>
+            <p class="sc-desc">Burning sensation in the chest or throat occurring after meals — not sure if it is gastric acid or something cardiac.</p>
+            <span class="sc-cta">Start Assessment <span class="sc-cta-arrow">&#8594;</span></span>
+          </div>
+        </div>
+
+        <!-- Trust band -->
+        <div class="trust-band">
+          <div class="trust-item">
+            <div class="trust-num">70,000+</div>
+            <div class="trust-sub">Real patient training cohort</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">0</div>
+            <div class="trust-sub">Invasive tests required — 100% accessible vitals only</div>
+          </div>
+          <div class="trust-item">
+            <div class="trust-num">AHA &amp; DASH</div>
+            <div class="trust-sub">Evidence-based clinical nutrition protocols</div>
+          </div>
+        </div>
+
+        <!-- Model transparency -->
+        <div class="model-panel">
+          <div class="model-panel-head">
+            <div>
+              <div class="section-label">Model Transparency</div>
+              <h2 class="section-h2" style="font-size:26px;">How the risk score is really produced</h2>
+              <p class="section-sub" style="margin-bottom:0;">Held-out accuracy, the baseline it is compared against, and the limits of the model — published here rather than left in a slide deck.</p>
+            </div>
+          </div>
+          <div id="model-info-body" class="model-info-body"></div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 2 — WIZARD
+    ================================================================ -->
+    <section id="stage-wizard" class="stage">
+      <div class="container">
+        <div class="wizard-shell">
+
+          <!-- Sidebar -->
+          <aside class="wizard-sidebar">
+            <div class="wiz-sidebar-title">Your Assessment</div>
+            <div class="wiz-step-item active" id="wiz-sidebar-1">
+              <div class="wiz-step-circle active" id="sc-1">1</div>
+              <span class="wiz-step-name">About You</span>
+            </div>
+            <div class="wiz-step-item" id="wiz-sidebar-2">
+              <div class="wiz-step-circle" id="sc-2">2</div>
+              <span class="wiz-step-name">Your Sensations</span>
+            </div>
+            <div class="wiz-step-item" id="wiz-sidebar-3">
+              <div class="wiz-step-circle" id="sc-3">3</div>
+              <span class="wiz-step-name">Triggers &amp; Timing</span>
+            </div>
+            <div class="wiz-step-item" id="wiz-sidebar-4">
+              <div class="wiz-step-circle" id="sc-4">4</div>
+              <span class="wiz-step-name">Health Background</span>
+            </div>
+            <div class="wiz-selected-badge" id="wiz-problem-badge" style="display:none;">
+              <div class="wsb-label">Selected concern</div>
+              <div class="wsb-value" id="wiz-problem-label">—</div>
+            </div>
+          </aside>
+
+          <!-- Main wizard card -->
+          <div>
+            <div class="wizard-progress-bar">
+              <div class="wizard-progress-fill" id="wiz-progress-fill" style="width:25%;"></div>
+            </div>
+            <div class="wizard-card">
+
+              <!-- Step 1 -->
+              <div class="step-panel active" id="wizard-step-1">
+                <div class="step-eyebrow">Step 1 of 4</div>
+                <h2 class="step-h2">Tell us about yourself</h2>
+                <p class="step-desc">Basic profile to personalise the evaluation for your age and body type.</p>
+
+                <div class="form-group">
+                  <label class="form-label">Your Age (years)</label>
+                  <input type="number" id="wiz-age" class="form-input" min="15" max="100" value="52" placeholder="e.g. 52">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Biological Sex</label>
+                  <div class="chip-row">
+                    <button class="chip selected" id="sex-male"   onclick="setChip('gender','MALE',this)">Male</button>
+                    <button class="chip"           id="sex-female" onclick="setChip('gender','FEMALE',this)">Female</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Approximate Body Build</label>
+                  <div class="chip-row">
+                    <button class="chip"          onclick="setBuild(170,60,this)">Slim / Lean</button>
+                    <button class="chip selected" onclick="setBuild(170,74,this)">Average / Medium</button>
+                    <button class="chip"          onclick="setBuild(170,86,this)">Slightly Overweight</button>
+                    <button class="chip"          onclick="setBuild(170,102,this)">Heavier Build</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 2 -->
+              <div class="step-panel" id="wizard-step-2">
+                <div class="step-eyebrow">Step 2 of 4</div>
+                <h2 class="step-h2">What are you feeling?</h2>
+                <p class="step-desc">Describe the sensations or discomfort you have noticed in your body.</p>
+
+                <div class="form-group">
+                  <label class="form-label">Type of sensation in your chest</label>
+                  <div class="chip-row">
+                    <button class="chip selected" onclick="setChip('sensation','HEAVY_PRESSURE_TIGHTNESS',this)">Heavy Pressure / Tightness</button>
+                    <button class="chip"          onclick="setChip('sensation','BURNING_ACID_REFLUX',this)">Burning / Acid Reflux</button>
+                    <button class="chip"          onclick="setChip('sensation','PALPITATIONS_ARRHYTHMIA',this)">Heart Fluttering / Racing</button>
+                    <button class="chip"          onclick="setChip('sensation','SHARP_PLEURITIC_OR_MUSCULOSKELETAL',this)">Sharp Needle Pricking</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Does the discomfort spread anywhere else?</label>
+                  <div class="chip-row">
+                    <button class="chip selected" onclick="setChip('radiation','NONE',this)">Stays only in centre chest</button>
+                    <button class="chip"          onclick="setChip('radiation','LEFT_ARM_SHOULDER',this)">Left arm or shoulder</button>
+                    <button class="chip"          onclick="setChip('radiation','JAW_NECK_THROAT',this)">Jaw, teeth, or neck</button>
+                    <button class="chip"          onclick="setChip('radiation','INTERSCAPULAR_BACK',this)">Upper back</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 3 -->
+              <div class="step-panel" id="wizard-step-3">
+                <div class="step-eyebrow">Step 3 of 4</div>
+                <h2 class="step-h2">When does it happen?</h2>
+                <p class="step-desc">Understanding triggers and duration helps pinpoint cardiac vs. non-cardiac causes.</p>
+
+                <div class="form-group">
+                  <label class="form-label">What tends to bring on the discomfort?</label>
+                  <div class="chip-row">
+                    <button class="chip selected" id="trig-exertion" onclick="setChip('trigger','PHYSICAL_EXERTION',this)">Climbing stairs or walking fast</button>
+                    <button class="chip"          id="trig-meal"     onclick="setChip('trigger','POST_PRANDIAL_MEALS',this)">After heavy or spicy meals</button>
+                    <button class="chip"          id="trig-stress"   onclick="setChip('trigger','EMOTIONAL_STRESS',this)">When stressed or anxious</button>
+                    <button class="chip"          id="trig-rest"     onclick="setChip('trigger','NONE',this)">Comes on randomly at rest</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">How long does an episode usually last?</label>
+                  <div class="chip-row">
+                    <button class="chip"          onclick="setChip('duration','SECONDS',this)">A few seconds only</button>
+                    <button class="chip selected" onclick="setChip('duration','MINUTES_5_TO_15',this)">2 – 10 minutes (eases with rest)</button>
+                    <button class="chip"          onclick="setChip('duration','PROLONGED_OVER_20_MINS',this)">Continuous for over 20–30 minutes</button>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Step 4 -->
+              <div class="step-panel" id="wizard-step-4">
+                <div class="step-eyebrow">Step 4 of 4</div>
+                <h2 class="step-h2">Health background &amp; details</h2>
+                <p class="step-desc">Known vitals, lifestyle habits, or anything else you'd like to share with us.</p>
+
+                <div class="form-group">
+                  <label class="form-label">Your typical blood pressure (approximate)</label>
+                  <div style="display:flex; gap:12px;">
+                    <input type="number" id="wiz-sys" class="form-input" placeholder="Systolic e.g. 140" value="142">
+                    <input type="number" id="wiz-dia" class="form-input" placeholder="Diastolic e.g. 90" value="90">
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Existing health conditions (select all that apply)</label>
+                  <div class="chip-row">
+                    <button class="chip selected" id="chip-htn"   onclick="toggleMultiChip(this,'htn')">High Blood Pressure</button>
+                    <button class="chip"          id="chip-diab"  onclick="toggleMultiChip(this,'diab')">Diabetes / High Sugar</button>
+                    <button class="chip"          id="chip-smk"   onclick="toggleMultiChip(this,'smk')">Smoker / Tobacco</button>
+                    <button class="chip"          id="chip-sweat" onclick="toggleMultiChip(this,'sweat')">Cold Sweating &#9888;</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Cholesterol, if you have had a blood test (optional)</label>
+                  <div class="chip-row">
+                    <button class="chip" onclick="setChip('cholesterol', 1, this)">Normal</button>
+                    <button class="chip" onclick="setChip('cholesterol', 2, this)">Above normal</button>
+                    <button class="chip" onclick="setChip('cholesterol', 3, this)">High</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Fasting blood sugar, if known (optional)</label>
+                  <div class="chip-row">
+                    <button class="chip" onclick="setChip('gluc', 1, this)">Normal</button>
+                    <button class="chip" onclick="setChip('gluc', 2, this)">Above normal</button>
+                    <button class="chip" onclick="setChip('gluc', 3, this)">High</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Lifestyle (optional)</label>
+                  <div class="chip-row">
+                    <button class="chip" onclick="setChip('alco', 1, this)">Drinks alcohol</button>
+                    <button class="chip" onclick="setChip('alco', 0, this)">Does not drink</button>
+                  </div>
+                  <div class="chip-row" style="margin-top:8px;">
+                    <button class="chip" onclick="setChip('active', 1, this)">Physically active</button>
+                    <button class="chip" onclick="setChip('active', 0, this)">Mostly inactive</button>
+                  </div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label">Describe how you feel in your own words (optional)</label>
+                  <textarea id="wiz-text" class="form-input" style="height:80px; resize:vertical;" placeholder="e.g. I felt a heavy weight on my chest walking up the stairs this morning..."></textarea>
+                </div>
+              </div>
+
+              <!-- Footer -->
+              <div class="wizard-footer">
+                <button class="btn-outline" id="wiz-prev-btn" onclick="prevStep()" style="display:none;">&#8592; Back</button>
+                <div style="margin-left:auto; display:flex; gap:12px;">
+                  <button class="btn-primary" id="wiz-next-btn"   onclick="nextStep()">Next Step &#8594;</button>
+                  <button class="btn-primary" id="wiz-submit-btn" onclick="submitAssessment()" style="display:none;">Generate My Care Plan &#129658;</button>
+                </div>
+              </div>
+
+            </div><!-- /wizard-card -->
+          </div><!-- /main -->
+        </div><!-- /wizard-shell -->
+      </div><!-- /container -->
+    </section>
+
+    <!-- ================================================================
+         STAGE 3 — REPORT
+    ================================================================ -->
+    <section id="stage-report" class="stage">
+      <div class="container">
+        <div class="report-shell">
+
+          <!-- Verdict banner -->
+          <div id="report-verdict-banner" class="verdict-banner urgent">
+            <div class="verdict-icon">&#129658;</div>
+            <div class="verdict-text">
+              <div class="verdict-tag" id="report-urgency">CLINICAL TRIAGE EVALUATION</div>
+              <h2 class="verdict-h2" id="report-headline">Evaluating your assessment&hellip;</h2>
+              <div class="verdict-note" id="report-doctor-opinion">Loading specialist recommendation&hellip;</div>
+            </div>
+          </div>
+
+          <!-- Tabs -->
+          <div class="report-tabs">
+            <button class="rtab active" onclick="switchReportTab('reasoning')">&#129658; Clinical Explanation</button>
+            <button class="rtab"        onclick="switchReportTab('diet')">&#129367; Prescribed Diet</button>
+            <button class="rtab"        onclick="switchReportTab('remedies')">&#127807; Home Remedies</button>
+            <button class="rtab"        onclick="switchReportTab('doctors')">&#128104;&#8205;&#9877; Matched Specialists</button>
+          </div>
+
+          <!-- Tab 1: Clinical Reasoning -->
+          <div id="rtab-reasoning" class="report-panel active">
+            <div class="info-card">
+              <div class="info-card-title">Primary Clinical Suspicion</div>
+              <div class="suspicion-chip" id="report-suspicion">—</div>
+              <p id="report-reasoning-text"></p>
+              <div class="red-flag-box">
+                <div class="rf-title">&#9888;&#65039; When to seek emergency care immediately</div>
+                <ul class="rf-list" id="report-red-flags"></ul>
+              </div>
+            </div>
+            <div class="disclaimer-card">
+              <div class="disclaimer-title">&#9877;&#65039; This is not a medical diagnosis</div>
+              <p>CardiaNova is an educational screening aid. It applies rule-based symptom patterns and a statistical risk model to the information you typed, and it can be wrong in both directions. It cannot examine you, run an ECG or order blood tests. Always confirm anything shown here with a qualified clinician, and in an emergency call your local emergency number instead of using this page.</p>
+            </div>
+          </div>
+
+          <!-- Tab 2: Diet -->
+          <div id="rtab-diet" class="report-panel">
+            <div class="info-card">
+              <h3 class="info-card-title" id="report-diet-title">Prescribed Heart Diet</h3>
+              <p id="report-diet-goal"></p>
+            </div>
+            <div class="diet-cols">
+              <div class="diet-col">
+                <div class="diet-col-title" style="color:#059669;">&#9989; Foods to eat daily</div>
+                <div id="report-foods-eat"></div>
+              </div>
+              <div class="diet-col">
+                <div class="diet-col-title" style="color:#DC2626;">&#10060; Foods to strictly avoid</div>
+                <div id="report-foods-avoid"></div>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-card-title">&#127374; Sample 1-Day Meal Plan</div>
+              <div class="meal-grid" id="report-menu-grid"></div>
+            </div>
+          </div>
+
+          <!-- Tab 3: Remedies -->
+          <div id="rtab-remedies" class="report-panel">
+            <div class="breath-coach">
+              <h3 class="breath-h">4-7-8 Cardiac Vagal Breathing Coach</h3>
+              <p class="breath-sub">Activates the vagus nerve to lower acute heart rate and reduce systolic BP by 6&ndash;10 mm Hg within minutes.</p>
+              <div class="breath-ring-wrap">
+                <div class="breath-ring" id="breath-circle">Ready</div>
+              </div>
+              <button class="btn-primary" id="btn-breathing" onclick="toggleBreathing()">Start 1-Minute Session</button>
+            </div>
+            <div id="report-remedies-list"></div>
+          </div>
+
+          <!-- Tab 4: Doctors -->
+          <div id="rtab-doctors" class="report-panel">
+            <div class="info-card">
+              <h3 class="info-card-title">Real Doctors Near You</h3>
+              <p style="font-size:14px; color:var(--slate);">Tell us where you are and we will look up real hospitals, cardiac centres and doctors near that place on live internet maps &mdash; nobody is invented.</p>
+            </div>
+            <div class="loc-panel" id="report-loc-panel">
+              <label class="loc-label" for="report-loc-input">Your city or area</label>
+              <div class="loc-row">
+                <input type="text" id="report-loc-input" class="form-input" placeholder="e.g. Jammu, or Pune, India"
+                       onkeydown="if(event.key==='Enter'){searchDoctorsFrom('report');}">
+                <button class="btn-outline loc-btn" onclick="useMyLocation('report')">&#128205; Use my location</button>
+                <button class="btn-primary loc-btn" onclick="searchDoctorsFrom('report')">Find doctors</button>
+              </div>
+              <div class="loc-status" id="report-loc-status"></div>
+            </div>
+            <div id="report-doctors-list"></div>
+          </div>
+
+          <!-- Bottom actions -->
+          <div style="display:flex; gap:12px; margin-top:32px; flex-wrap:wrap;">
+            <button class="btn-outline" onclick="window.print()">&#128438; Print Care Plan</button>
+            <button class="btn-primary" onclick="switchStage('home')">&#8592; Start New Assessment</button>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 4 — LIFESTYLE SIMULATOR
+    ================================================================ -->
+    <section id="stage-simulator" class="stage">
+      <div class="container">
+        <div class="sim-shell">
+
+          <div class="section-heading-group">
+            <div class="section-label">Evidence-Based Digital Twin Lab</div>
+            <h1 class="section-h2">'What-If' Lifestyle Simulator</h1>
+            <p class="section-sub">Slide the controls to see in real time how lifestyle changes reduce your cardiovascular risk — modelled on 70,000 patients.</p>
+          </div>
+
+          <div class="sim-grid">
+            <!-- Baseline -->
+            <div class="sim-card">
+              <div class="sim-card-title danger">&#128308; Current Baseline Vitals</div>
+              <div class="slider-wrap">
+                <div class="slider-label">
+                  <span class="slider-name">Systolic Blood Pressure</span>
+                  <span class="slider-val" id="val-base-sys">155 mm Hg</span>
+                </div>
+                <input type="range" id="sim-base-sys" min="110" max="190" value="155" oninput="updateSimulation()">
+              </div>
+              <div class="slider-wrap">
+                <div class="slider-label">
+                  <span class="slider-name">Body Weight</span>
+                  <span class="slider-val" id="val-base-wt">86 kg</span>
+                </div>
+                <input type="range" id="sim-base-wt" min="50" max="130" value="86" oninput="updateSimulation()">
+              </div>
+              <div class="risk-display high">
+                <div class="risk-label high">Baseline Cardiovascular Risk</div>
+                <div class="risk-pct high" id="sim-base-prob">68.2%</div>
+                <div class="risk-cat high" id="sim-base-cat">High Risk</div>
+              </div>
+            </div>
+
+            <!-- Target -->
+            <div class="sim-card">
+              <div class="sim-card-title success">&#128994; Target After Intervention</div>
+              <div class="slider-wrap">
+                <div class="slider-label">
+                  <span class="slider-name">Target Systolic BP (DASH diet)</span>
+                  <span class="slider-val" id="val-target-sys">122 mm Hg</span>
+                </div>
+                <input type="range" id="sim-target-sys" min="110" max="190" value="122" oninput="updateSimulation()">
+              </div>
+              <div class="slider-wrap">
+                <div class="slider-label">
+                  <span class="slider-name">Target Weight (after diet &amp; walks)</span>
+                  <span class="slider-val" id="val-target-wt">76 kg</span>
+                </div>
+                <input type="range" id="sim-target-wt" min="50" max="130" value="76" oninput="updateSimulation()">
+              </div>
+              <div class="risk-display low">
+                <div class="risk-label low">Projected Cardiovascular Risk</div>
+                <div class="risk-pct low" id="sim-target-prob">24.5%</div>
+                <div class="risk-cat low" id="sim-target-cat">Mild Risk</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="sim-savings">
+            <div class="sim-savings-label">Projected Life-Saving Risk Reduction</div>
+            <div class="sim-savings-num" id="sim-diff-text">&minus;43.7%</div>
+            <div class="sim-savings-sub">Lowering systolic BP and losing weight could reduce your absolute cardiovascular risk by this amount.</div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ================================================================
+         STAGE 5 — DOCTORS DIRECTORY
+    ================================================================ -->
+    <section id="stage-doctors" class="stage">
+      <div class="container">
+        <div class="doctors-shell">
+          <div class="section-heading-group">
+            <div class="section-label">Live Clinical Directory</div>
+            <h1 class="section-h2">Find a Real Doctor Near You</h1>
+            <p class="section-sub">Enter your city and we will search live internet maps for real hospitals, cardiac centres and doctors in that place only.</p>
+          </div>
+          <div class="loc-panel" id="full-loc-panel">
+            <label class="loc-label" for="full-loc-input">Your city or area</label>
+            <div class="loc-row">
+              <input type="text" id="full-loc-input" class="form-input" placeholder="e.g. Jammu, or Pune, India"
+                     onkeydown="if(event.key==='Enter'){searchDoctorsFrom('full');}">
+              <button class="btn-outline loc-btn" onclick="useMyLocation('full')">&#128205; Use my location</button>
+              <button class="btn-primary loc-btn" onclick="searchDoctorsFrom('full')">Find doctors</button>
+            </div>
+            <div class="loc-status" id="full-loc-status"></div>
+          </div>
+          <div class="doctors-grid" id="full-doctors-grid"></div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-disclaimer">
+        <div class="fd-title">&#9877;&#65039; Medical disclaimer</div>
+        <p>
+          CardiaNova is a software demonstration, not a medical device and not a substitute for
+          professional medical advice, diagnosis or treatment. Symptom interpretation uses
+          hand-written rule-based patterns, and the risk percentage comes from a statistical model
+          trained on a single public dataset that has not been validated on any local population.
+          Both can be wrong. Never delay seeking care because of something you read here &mdash;
+          in a suspected emergency call 108 (India), 112 or 911 immediately.
+        </p>
+      </div>
+      <div class="footer-meta">
+        <span>Live facility data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener noreferrer">OpenStreetMap contributors</a></span>
+        <span>Risk dataset &copy; UCI / Kaggle Cardiovascular Disease (70,000 patients)</span>
+        <span>Educational project &middot; no patient data is stored</span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>

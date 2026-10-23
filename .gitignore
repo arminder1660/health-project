@@ -1,0 +1,32 @@
+# ---- Python ----
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# ---- Virtual environments ----
+venv/
+.venv/
+env/
+
+# ---- Secrets (never commit a real Google Places key) ----
+.env
+
+# ---- Trained artifacts ----
+# models/cardio_model.joblib IS committed on purpose (about 1 MB) so a fresh
+# clone can run the app immediately. Rebuild it with: python -m src.train
+# If you retrain locally, commit the new artifact too, or delete the file and
+# let the run script rebuild it.
+
+# ---- Raw data ----
+# data/cardio_train.csv IS committed (about 2.8 MB) so training works offline.
+# Source: https://www.kaggle.com/datasets/sulianova/cardiovascular-disease-dataset
+
+# ---- Legacy / local junk ----
+db.sqlite3
+*.log
+.DS_Store
+Thumbs.db
+*tempCodeRunnerFile*

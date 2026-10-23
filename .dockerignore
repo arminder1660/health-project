@@ -1,0 +1,17 @@
+# The local virtualenv is roughly a gigabyte of Windows binaries and is useless
+# inside a Linux image, which installs its own dependencies from requirements.txt.
+venv/
+.venv/
+env/
+
+# Version control, editor state and caches are not part of the runtime image.
+.git/
+.gitignore
+.idea/
+.vscode/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+
+# Local secrets stay out of the image. The app runs fine without a key.
+.env
